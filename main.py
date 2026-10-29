@@ -11,13 +11,15 @@ from dataset import DerainDataset
 from utils import calculate_metrics, save_checkpoint, load_checkpoint, save_some_examples
 from models.baseline_net import BaselineNet
 from models.unet import UNet
+from models.DerainNet import derainnet
+from models.MyModel import mymoodel
 from losses.perceptual_loss import PerceptualLoss
 
 
 def get_args():
     parser = argparse.ArgumentParser(description="Deraining Model Training")
     parser.add_argument("--data_dir", type=str, required=True, help="Path to the dataset")
-    parser.add_argument("--model", type=str, default="baseline", choices=["baseline", "unet"], help="Model to use")
+    parser.add_argument("--model", type=str, default="baseline", choices=["baseline", "unet", "DerainNet", "MyModel"], help="Model to use")
     parser.add_argument("--mode", type=str, default="train", choices=["train", "test"], help="Train or test mode")
     parser.add_argument("--checkpoint", type=str, default=None, help="Path to checkpoint for testing")
 
@@ -83,6 +85,10 @@ def main():
         model = BaselineNet().to(device)
     elif args.model == "unet":
         model = UNet().to(device)
+    elif args.model == "DerainNet":
+        model = derainnet().to(device)
+    elif args.model == "MyModel":
+        model = mymoodel.to(device)
 
 
     lpips_fn = lpips.LPIPS(net='alex').to(device)

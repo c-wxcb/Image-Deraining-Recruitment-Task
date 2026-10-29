@@ -1,8 +1,13 @@
 import torch
 import numpy as np
-from skimage.metrics import peak_signal_noise_ratio as psnr
+# from skimage.metrics import peak_signal_noise_ratio as psnr
 from skimage.metrics import structural_similarity as ssim
 from torchvision.utils import save_image
+
+def psnr(img1,img2,data_range=1.0):
+    mse=np.mean((img1-img2)**2)
+    psnr=10*np.log10(data_range/mse)
+    return psnr
 
 
 def calculate_metrics(img1, img2, lpips_fn):

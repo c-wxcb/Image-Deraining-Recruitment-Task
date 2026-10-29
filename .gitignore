@@ -1,0 +1,19 @@
+
+# Python 缓存
+__pycache__/
+*.py[cod]
+
+# PyCharm 配置
+.idea/
+
+# 数据集
+data/
+
+# 模型权重和训练检查点
+checkpoints/
+*.pth
+*.pt
+*.ckpt
+
+# 其他生成文件
+evaluation_images/
